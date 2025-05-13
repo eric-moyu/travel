@@ -900,18 +900,18 @@
         }
         
         /* 地图组件 */
-        .map-container {
+        .travel-route-card {
             background-color: var(--card-bg);
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             overflow: hidden;
             margin-bottom: 30px;
-            height: 100%; /* 确保地图容器高度与天气容器匹配 */
+            height: 100%; /* 确保高度匹配天气容器 */
             display: flex;
             flex-direction: column;
         }
         
-        .map-header {
+        .travel-route-header {
             background-color: var(--primary-color);
             color: white;
             padding: 12px 15px;
@@ -921,58 +921,32 @@
             align-items: center;
         }
         
-        .map-header i {
+        .travel-route-header i {
             margin-right: 10px;
         }
         
-        #map-canvas {
-            width: 100%;
-            flex: 1; /* 让地图画布填充剩余空间 */
-            height: auto; /* 替换固定高度，使用flex布局 */
-            min-height: 320px; /* 设置最小高度 */
-            position: relative;
-        }
-        
-        /* 修复地图底部空白问题 */
-        .map-container {
-            position: relative;
-            margin-bottom: 0 !important;
-            overflow: hidden;
-            padding-bottom: 0;
-        }
-        
-        .location-list {
-            max-height: 220px;
-            overflow-y: auto;
-            padding: 15px;
-        }
-        
-        .location-item {
-            padding: 8px 12px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .travel-route-content {
+            flex: 1;
             display: flex;
             align-items: center;
+            justify-content: center;
+            padding: 0;
+            overflow: hidden;
         }
         
-        .location-item:hover {
-            background-color: var(--bg-color);
+        .travel-route-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
         }
         
-        .location-item.active {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .location-item i {
-            margin-right: 10px;
-            color: var(--accent-color);
-        }
-        
-        .location-item.active i {
-            color: white;
+        /* 确保边框处理正确 */
+        .travel-route-card {
+            position: relative;
+            margin-bottom: 0 !important;
+            border-radius: 12px;
+            overflow: hidden;
         }
         
         /* 日程导航样式 */
@@ -1035,18 +1009,8 @@
                 font-size: 1.3rem;
             }
             
-            #map-canvas {
+            .travel-route-img {
                 height: 250px;
-            }
-            
-            .location-list {
-                padding: 10px;
-            }
-            
-            .location-item {
-                padding: 6px 10px;
-                margin-bottom: 5px;
-                font-size: 0.9rem;
             }
         }
         
@@ -1068,7 +1032,7 @@
                 font-size: 0.8rem;
             }
             
-            #map-canvas {
+            .travel-route-img {
                 height: 200px;
             }
         }
@@ -1300,12 +1264,14 @@
                     </div>
                 </div>
 
-                <div class="map-container">
-                    <div class="map-header">
+                <div class="travel-route-card">
+                    <div class="travel-route-header">
                         <i class="ri-map-pin-line"></i>
                         <span>行程地图</span>
                     </div>
-                    <div id="map-canvas"></div>
+                    <div class="travel-route-content">
+                        <img src="https://ivy.hidns.vip/images/original/landscape/20250513_174734_792.jpg" alt="行程路线图" class="travel-route-img">
+                    </div>
                 </div>
             </div>
             
@@ -1647,61 +1613,19 @@
         
         // 监听窗口大小调整事件
         window.addEventListener('resize', () => {
-            // 调整地图容器高度
             setTimeout(() => {
                 const weatherContainer = document.querySelector('.weather-container');
-                const mapContainer = document.querySelector('.map-container');
-                const mapCanvas = document.getElementById('map-canvas');
+                const mapContainer = document.querySelector('.travel-route-card');
+                const mapImage = document.querySelector('.travel-route-img');
                 
-                if (weatherContainer && mapContainer && mapCanvas) {
+                if (weatherContainer && mapContainer && mapImage) {
                     const weatherHeight = weatherContainer.offsetHeight;
                     mapContainer.style.height = weatherHeight + 'px';
-                    mapCanvas.style.height = (weatherHeight - 43) + 'px'; // 减去header高度
+                    mapImage.style.height = (weatherHeight - 43) + 'px'; // 减去header高度
                     console.log("窗口大小调整后地图高度为:", weatherHeight);
                 }
             }, 200);
         });
-        
-        // 静态地图初始化
-        let markers = [];
-        
-        function initMap() {
-            try {
-                // 获取地图容器
-                const mapCanvas = document.getElementById('map-canvas');
-                
-                // 清空容器内容
-                mapCanvas.innerHTML = '';
-                
-                // 创建图片元素
-                const mapImage = document.createElement('img');
-                mapImage.src = 'https://ivy.hidns.vip/images/original/landscape/20250513_162024_536.jpg'; // 使用新的可靠图片URL
-                mapImage.alt = '新疆伊犁旅游路线图';
-                mapImage.style.width = '100%';
-                mapImage.style.height = '100%';
-                mapImage.style.objectFit = 'cover'; // 使用cover确保铺满容器
-                mapImage.style.borderRadius = '0 0 12px 12px'; // 添加圆角，匹配容器风格
-                mapImage.style.display = 'block';
-                mapImage.style.margin = 'auto';
-                mapImage.style.padding = '0';
-                mapImage.style.position = 'absolute';
-                mapImage.style.top = '0';
-                mapImage.style.left = '0';
-                
-                // 添加图片加载失败时的处理
-                mapImage.onerror = function() {
-                    mapCanvas.innerHTML = "<p style='padding:15px;text-align:center;'>地图图片加载失败，请检查网络连接</p>";
-                };
-                
-                // 添加图片到容器
-                mapCanvas.appendChild(mapImage);
-                
-                console.log("静态地图初始化成功");
-            } catch (error) {
-                console.error("地图初始化失败:", error);
-                document.getElementById('map-canvas').innerHTML = "<p style='padding:15px;text-align:center;'>地图加载失败，请刷新页面重试</p>";
-            }
-        }
         
         // 获取天气数据缓存
         function getWeatherCache(location) {
@@ -2345,7 +2269,6 @@
             console.log("页面加载完成，开始初始化组件");
             // 获取所有地点的天气
             fetchAllWeather();
-            initMap();
             initGallery();
             
             // 应用懒加载
@@ -2363,13 +2286,13 @@
             // 调整地图容器高度与天气容器一致
             setTimeout(() => {
                 const weatherContainer = document.querySelector('.weather-container');
-                const mapContainer = document.querySelector('.map-container');
-                const mapCanvas = document.getElementById('map-canvas');
+                const mapContainer = document.querySelector('.travel-route-card');
+                const mapImage = document.querySelector('.travel-route-img');
                 
-                if (weatherContainer && mapContainer && mapCanvas) {
+                if (weatherContainer && mapContainer && mapImage) {
                     const weatherHeight = weatherContainer.offsetHeight;
                     mapContainer.style.height = weatherHeight + 'px';
-                    mapCanvas.style.height = (weatherHeight - 43) + 'px'; // 减去header高度
+                    mapImage.style.height = (weatherHeight - 43) + 'px'; // 减去header高度
                     console.log("已调整地图高度为:", weatherHeight);
                 }
             }, 500); // 延迟500ms，确保天气内容已加载
@@ -2573,13 +2496,13 @@
                 // 调整地图容器高度与天气容器一致
                 setTimeout(() => {
                     const weatherContainer = document.querySelector('.weather-container');
-                    const mapContainer = document.querySelector('.map-container');
-                    const mapCanvas = document.getElementById('map-canvas');
+                    const mapContainer = document.querySelector('.travel-route-card');
+                    const mapImage = document.querySelector('.travel-route-img');
                     
-                    if (weatherContainer && mapContainer && mapCanvas) {
+                    if (weatherContainer && mapContainer && mapImage) {
                         const weatherHeight = weatherContainer.offsetHeight;
                         mapContainer.style.height = weatherHeight + 'px';
-                        mapCanvas.style.height = (weatherHeight - 43) + 'px'; // 减去header高度
+                        mapImage.style.height = (weatherHeight - 43) + 'px'; // 减去header高度
                         console.log("天气更新后调整地图高度为:", weatherHeight);
                     }
                 }, 200); // 延迟200ms，确保天气UI已更新
