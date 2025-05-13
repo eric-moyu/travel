@@ -928,8 +928,7 @@
         .travel-route-content {
             flex: 1;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
             padding: 0;
             overflow: hidden;
         }
@@ -947,6 +946,78 @@
             margin-bottom: 0 !important;
             border-radius: 12px;
             overflow: hidden;
+        }
+        
+        /* 行程表格样式 */
+        .route-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+        
+        .route-table th {
+            background-color: var(--bg-color);
+            padding: 10px 15px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .route-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+        
+        .route-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .route-table td i {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+        
+        .route-table tr:hover {
+            background-color: var(--bg-color);
+        }
+        
+        .map-image-container {
+            padding: 15px;
+            background-color: var(--bg-color);
+        }
+        
+        /* 移动端响应式调整 */
+        @media (max-width: 768px) {
+            .route-table {
+                font-size: 0.85rem;
+            }
+            
+            .route-table th, 
+            .route-table td {
+                padding: 8px 10px;
+            }
+            
+            .map-image-container {
+                padding: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .route-table {
+                font-size: 0.75rem;
+            }
+            
+            .route-table th, 
+            .route-table td {
+                padding: 6px 8px;
+            }
+            
+            .travel-route-img {
+                height: 180px;
+            }
         }
         
         /* 日程导航样式 */
@@ -1270,7 +1341,67 @@
                         <span>行程地图</span>
                     </div>
                     <div class="travel-route-content">
-                        <img src="https://ivy.hidns.vip/images/original/landscape/20250513_174734_792.jpg" alt="行程路线图" class="travel-route-img">
+                        <table class="route-table">
+                            <thead>
+                                <tr>
+                                    <th>行程时间</th>
+                                    <th>行程</th>
+                                    <th>距离/时间</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Day 1</td>
+                                    <td>珠海→乌鲁木齐</td>
+                                    <td>✈️ 7小时35分钟</td>
+                                    <td><i class="ri-flight-takeoff-line"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Day 2-3</td>
+                                    <td>乌鲁木齐→独库公路→伊宁</td>
+                                    <td>🛣️ 561公里 (1.5-2天)</td>
+                                    <td><i class="ri-car-line"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Day 4</td>
+                                    <td>伊宁→夏塔</td>
+                                    <td>🚗 273公里 (4小时18分钟)</td>
+                                    <td><i class="ri-time-line"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Day 5</td>
+                                    <td>夏塔→八卦城→喀拉峻</td>
+                                    <td>🚙 162.5公里 (2小时51分钟)</td>
+                                    <td><i class="ri-time-line"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Day 6</td>
+                                    <td>喀拉峻→库尔德宁</td>
+                                    <td>🌄 100公里 (2小时3分钟)</td>
+                                    <td><i class="ri-compass-3-line"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Day 7</td>
+                                    <td>库尔德宁→唐布拉百里画廊</td>
+                                    <td>🏞️ 202.1公里 (3小时12分钟)</td>
+                                    <td><i class="ri-time-line"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Day 8</td>
+                                    <td>唐布拉→伊宁</td>
+                                    <td>🌆 单程车程约3小时</td>
+                                    <td><i class="ri-car-line"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Day 9</td>
+                                    <td>伊宁→乌鲁木齐→珠海</td>
+                                    <td>✈️ 全天航班接续</td>
+                                    <td><i class="ri-flight-takeoff-line"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
                     </div>
                 </div>
             </div>
@@ -1288,8 +1419,8 @@
                 </div>
                 <div class="day-content">
                     <ul>
-                        <li>22:10抵达乌鲁木齐，当天只能休息</li>
-                        <li>提前预订市区酒店，方便第二天出发</li>
+                        <li>✈️ 22:10抵达乌鲁木齐，当天只能休息</li>
+                        <li>🏨 提前预订市区酒店，方便第二天出发</li>
                     </ul>
                 </div>
             </div>
@@ -1307,16 +1438,16 @@
                 </div>
                 <div class="day-content">
                     <ul>
-                        <li>独库公路全长561公里，需要1.5-2天时间</li>
-                        <li><strong>沿途景点</strong>：那拉提草原、独库公路沿线风景</li>
+                        <li>🛣️ 独库公路全长561公里，需要1.5-2天时间</li>
+                        <li><strong>🌄 沿途景点</strong>：那拉提草原、独库公路沿线风景</li>
                     </ul>
                     
                     <div class="section-title">那拉提特色</div>
                     <ul>
-                        <li>那拉提草原是世界四大草原之一，有"空中草原"之称</li>
-                        <li>可以品尝当地的冰屿老酸奶（奶味一般，较甜）</li>
-                        <li>新疆文旅空中草原酒店早餐味道不错</li>
-                        <li>Day 2晚上住在那拉提</li>
+                        <li>🌿 那拉提草原是世界四大草原之一，有"空中草原"之称</li>
+                        <li>🍲 可以品尝当地的冰屿老酸奶（奶味一般，较甜）</li>
+                        <li>🏨 新疆文旅空中草原酒店早餐味道不错</li>
+                        <li>🌃 Day 2晚上住在那拉提</li>
                     </ul>
                 </div>
             </div>
@@ -1334,40 +1465,40 @@
                 </div>
                 <div class="day-content">
                     <ul>
-                        <li>273公里，4小时18分钟车程</li>
+                        <li>🚗 273公里，4小时18分钟车程</li>
                     </ul>
                     
                     <div class="section-title">夏塔景区信息</div>
                     <ul>
-                        <li>位于新疆伊犁南部的昭苏县，距离昭苏约70公里，临近天山主山脉</li>
-                        <li>海拔2200米，集冰川、雪山、森林、峡谷、云杉、河流、草原、野花的综合性景观</li>
-                        <li>门票：80元（景区门票40元+区间车40元）</li>
-                        <li>开放时间：9:00-17:00</li>
+                        <li>🏞️ 位于新疆伊犁南部的昭苏县，距离昭苏约70公里，临近天山主山脉</li>
+                        <li>⛰️ 海拔2200米，集冰川、雪山、森林、峡谷、云杉、河流、草原、野花的综合性景观</li>
+                        <li>💵 门票：80元（景区门票40元+区间车40元）</li>
+                        <li>🕰️ 开放时间：9:00-17:00</li>
                     </ul>
                     
                     <div class="section-title">交通方式</div>
                     <ul>
-                        <li>自驾：车可停在景区停车场（免费），需换乘景区区间车进入</li>
-                        <li>包车/拼车：从昭苏县城到夏塔约1小时车程</li>
+                        <li>🚗 自驾：车可停在景区停车场（免费），需换乘景区区间车进入</li>
+                        <li>🚌 包车/拼车：从昭苏县城到夏塔约1小时车程</li>
                     </ul>
                     
                     <div class="section-title">游玩建议</div>
                     <ul>
-                        <li>上午就进景区，下午容易下雨且时间不太够</li>
-                        <li>将军桥开始才是景区精华，前面路段建议乘坐电瓶车节省体力</li>
-                        <li>可选择骑马游览，马队管理规范，基本一人一匹马</li>
-                        <li>晚上住宿夏塔乡</li>
+                        <li>🕰️ 上午就进景区，下午容易下雨且时间不太够</li>
+                        <li>🚲 将军桥开始才是景区精华，前面路段建议乘坐电瓶车节省体力</li>
+                        <li>🐴 可选择骑马游览，马队管理规范，基本一人一匹马</li>
+                        <li>🌃 晚上住宿夏塔乡</li>
                     </ul>
                     
                     <div class="highlight">
                         <div class="section-title">注意事项</div>
                         <ul>
-                            <li>从将军桥开始就没有卖东西的地方，务必自备食物</li>
-                            <li>夏塔夏天早晚要穿羽绒服，白天短袖防晒衣即可</li>
-                            <li>一定要注意防晒，太阳很毒</li>
-                            <li>徒步需穿舒适的鞋，前往雪山脚下需带防水鞋具</li>
-                            <li>景区内只有温泉酒店有厕所</li>
-                            <li>卡拉2号房子开始就没有信号，建议结伴而行，带些现金</li>
+                            <li>🚷 从将军桥开始就没有卖东西的地方，务必自备食物</li>
+                            <li>🥶 夏塔夏天早晚要穿羽绒服，白天短袖防晒衣即可</li>
+                            <li>🌞 一定要注意防晒，太阳很毒</li>
+                            <li>👟 徒步需穿舒适的鞋，前往雪山脚下需带防水鞋具</li>
+                            <li>🚽 景区内只有温泉酒店有厕所</li>
+                            <li>📵 卡拉2号房子开始就没有信号，建议结伴而行，带些现金</li>
                         </ul>
                     </div>
                     
@@ -1388,24 +1519,24 @@
                 </div>
                 <div class="day-content">
                     <ul>
-                        <li>建议上午8点前离开夏塔</li>
-                        <li>在八卦城停留2小时左右</li>
+                        <li>🕰️ 建议上午8点前离开夏塔</li>
+                        <li>🕰️ 在八卦城停留2小时左右</li>
                     </ul>
                     
                     <div class="section-title">八卦城历史</div>
                     <ul>
-                        <li>八卦城又称特克斯八卦城，是世界上唯一的八卦城，始建于1846年</li>
-                        <li>城市布局按照八卦图形设计，体现了中国传统文化的智慧</li>
-                        <li>晚上住宿八卦城</li>
+                        <li>☯️ 八卦城又称特克斯八卦城，是世界上唯一的八卦城，始建于1846年</li>
+                        <li>🧩 城市布局按照八卦图形设计，体现了中国传统文化的智慧</li>
+                        <li>🌃 晚上住宿八卦城</li>
                     </ul>
                     
                     <div class="section-title">特克斯美食推荐</div>
                     <div class="food-item">
-                        <span>高胡赛东乡人家：手抓牛肉很香</span>
+                        <span>🐄 高胡赛东乡人家：手抓牛肉很香</span>
                         <span class="rating">★★★★</span>
                     </div>
                     <div class="food-item">
-                        <span>干煸炒面：非常好吃，可在街上找当地人多的店</span>
+                        <span>🍜 干煸炒面：非常好吃，可在街上找当地人多的店</span>
                         <span class="rating">★★★★★</span>
                     </div>
                     
@@ -1426,22 +1557,22 @@
                 <div class="day-content">
                     <div class="section-title">喀拉峻草原</div>
                     <ul>
-                        <li>喀拉峻草原是新疆三大名草原之一</li>
-                        <li>5月15日-6月20日可欣赏喀拉峻草原野花（黄、紫两色为主）五色花海</li>
-                        <li>晚上住库尔德宁镇</li>
+                        <li>🌾 喀拉峻草原是新疆三大名草原之一</li>
+                        <li>🌸 5月15日-6月20日可欣赏喀拉峻草原野花（黄、紫两色为主）五色花海</li>
+                        <li>🌃 晚上住库尔德宁镇</li>
                     </ul>
                     
                     <div class="section-title">库尔德宁美食推荐</div>
                     <div class="food-item">
-                        <span>喀峰大本营烤包子：肉香皮脆，强烈推荐</span>
+                        <span>🥟 喀峰大本营烤包子：肉香皮脆，强烈推荐</span>
                         <span class="rating">★★★★★</span>
                     </div>
                     <div class="food-item">
-                        <span>喀峰大本营咖啡：车后备箱咖啡店，很有特色</span>
+                        <span>☕ 喀峰大本营咖啡：车后备箱咖啡店，很有特色</span>
                         <span class="rating">★★★★</span>
                     </div>
                     <div class="food-item">
-                        <span>库尔墩柏睿营地晚餐：烤鸡较柴，主要是吃个环境</span>
+                        <span>🐓 库尔墩柏睿营地晚餐：烤鸡较柴，主要是吃个环境</span>
                         <span class="rating">★★★</span>
                     </div>
                     
@@ -1461,16 +1592,16 @@
                 </div>
                 <div class="day-content">
                     <ul>
-                        <li>车程3小时12分钟，距离202.1公里</li>
-                        <li>建议上午游览完库尔德宁出发</li>
-                        <li>下午到达唐布拉，可以游览部分百里画廊</li>
-                        <li>晚上住宿尼勒克县</li>
+                        <li>🛣️ 车程3小时12分钟，距离202.1公里</li>
+                        <li>🕰️ 建议上午游览完库尔德宁出发</li>
+                        <li>🕰️ 下午到达唐布拉，可以游览部分百里画廊</li>
+                        <li>🌃 晚上住宿尼勒克县</li>
                     </ul>
                     
                     <div class="section-title">唐布拉百里画廊</div>
                     <ul>
-                        <li>被誉为"中国最美的一条公路"</li>
-                        <li>沿途可欣赏到壮观的天山山脉、草原、河流和森林景观</li>
+                        <li>🏞️ 被誉为"中国最美的一条公路"</li>
+                        <li>🌄 沿途可欣赏到壮观的天山山脉、草原、河流和森林景观</li>
                     </ul>
                     
                 </div>
@@ -1489,58 +1620,58 @@
                 </div>
                 <div class="day-content">
                     <ul>
-                        <li>继续游览唐布拉百里画廊</li>
-                        <li>前往伊帕尔汗薰衣草观光园，下午返回伊宁</li>
+                        <li>🌄 继续游览唐布拉百里画廊</li>
+                        <li>🌸 前往伊帕尔汗薰衣草观光园，下午返回伊宁</li>
                     </ul>
                     
                     <div class="section-title">薰衣草观赏</div>
                     <ul>
-                        <li>伊帕尔汗薰衣草观光园：国家4A级旅游景区，门票45元</li>
-                        <li>解忧公主薰衣草园：全世界第三大薰衣草种植基地，门票35元（目前免费）</li>
-                        <li>漫心忘忧谷景区、四宫村、晃晃村薰衣草花海</li>
+                        <li>🏞️ 伊帕尔汗薰衣草观光园：国家4A级旅游景区，门票45元</li>
+                        <li>🌸 解忧公主薰衣草园：全世界第三大薰衣草种植基地，门票35元（目前免费）</li>
+                        <li>🌸 漫心忘忧谷景区、四宫村、晃晃村薰衣草花海</li>
                     </ul>
                     
                     <div class="section-title">伊宁美食推荐</div>
                     <div class="food-item">
-                        <span>馋辣大盘鸡：正宗，非常软烂入味</span>
+                        <span>🐓 馋辣大盘鸡：正宗，非常软烂入味</span>
                         <span class="rating">★★★★★</span>
                     </div>
                     <div class="food-item">
-                        <span>小公牛特色牛骨头：肉质好，香气浓郁</span>
+                        <span>🐄 小公牛特色牛骨头：肉质好，香气浓郁</span>
                         <span class="rating">★★★★★</span>
                     </div>
                     <div class="food-item">
-                        <span>小锅抓饭：羊肉软嫩，抓饭甜香油润</span>
+                        <span>🐑 小锅抓饭：羊肉软嫩，抓饭甜香油润</span>
                         <span class="rating">★★★★★</span>
                     </div>
                     <div class="food-item">
-                        <span>蓝墙面肺子：很香，里面的米肠子很特别</span>
+                        <span>🍚 蓝墙面肺子：很香，里面的米肠子很特别</span>
                         <span class="rating">★★★★</span>
                     </div>
                     <div class="food-item">
-                        <span>胖嘟嘟米粉：香料入味浓郁，米粉筋道</span>
+                        <span>🍜 胖嘟嘟米粉：香料入味浓郁，米粉筋道</span>
                         <span class="rating">★★★★</span>
                     </div>
                     <div class="food-item">
-                        <span>哈孜娜糕点坊：奶酪包很满足</span>
+                        <span>🍰 哈孜娜糕点坊：奶酪包很满足</span>
                         <span class="rating">★★★★★</span>
                     </div>
                     <div class="food-item">
-                        <span>西琳姑娘：新疆疙瘩酸奶、酸奶冰激凌、奶皮子奶茶都非常好喝，奶味纯正</span>
+                        <span>🍧 西琳姑娘：新疆疙瘩酸奶、酸奶冰激凌、奶皮子奶茶都非常好喝，奶味纯正</span>
                         <span class="rating">★★★★★</span>
                     </div>
                     
                     <div class="section-title">伊宁历史人文</div>
                     <ul>
-                        <li>伊犁河谷曾是塞种人的家园，后来乌孙人、突厥部落、唐朝、蒙古帝国等相继统治</li>
-                        <li>1762年，清朝打败准噶尔收复伊犁河谷，伊犁城成为清政府在新疆的关键城市</li>
-                        <li>1881年，左宗棠通过外交谈判成功收复了大部分伊犁地区</li>
-                        <li>可以参观伊犁博物馆，了解更多当地历史文化</li>
-                        <li>可以拜访林则徐纪念馆，缅怀这位"身无半亩，心忧天下"的爱国名臣</li>
+                        <li>🏛️ 伊犁河谷曾是塞种人的家园，后来乌孙人、突厥部落、唐朝、蒙古帝国等相继统治</li>
+                        <li>🏛️ 1762年，清朝打败准噶尔收复伊犁河谷，伊犁城成为清政府在新疆的关键城市</li>
+                        <li>🏛️ 1881年，左宗棠通过外交谈判成功收复了大部分伊犁地区</li>
+                        <li>🏛️ 可以参观伊犁博物馆，了解更多当地历史文化</li>
+                        <li>🏛️ 可以拜访林则徐纪念馆，缅怀这位"身无半亩，心忧天下"的爱国名臣</li>
                     </ul>
                     
                     <ul>
-                        <li>晚上可以在伊宁市区游览，品尝当地美食</li>
+                        <li>🌃 晚上可以在伊宁市区游览，品尝当地美食</li>
                     </ul>
                 </div>
             </div>
@@ -1558,8 +1689,8 @@
                 </div>
                 <div class="day-content">
                     <ul>
-                        <li>伊宁到乌鲁木齐（CZ6824,21:20起飞，22:35到达）</li>
-                        <li>乌鲁木齐到珠海（CZ3792,9:00起飞,经停太原，16:15到珠海）</li>
+                        <li>🛫 伊宁到乌鲁木齐（CZ6824,21:20起飞，22:35到达）</li>
+                        <li>🛫 乌鲁木齐到珠海（CZ3792,9:00起飞,经停太原，16:15到珠海）</li>
                     </ul>
                 </div>
             </div>
@@ -2276,7 +2407,7 @@
             dayImages.forEach(img => {
                 img.classList.add('lazyload');
                 img.setAttribute('data-src', img.src);
-                img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3C/svg%3E";
+                img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450%3E%3C/svg%3E";
             });
             lazyLoadImages();
             
@@ -2292,8 +2423,18 @@
                 if (weatherContainer && mapContainer && mapImage) {
                     const weatherHeight = weatherContainer.offsetHeight;
                     mapContainer.style.height = weatherHeight + 'px';
-                    mapImage.style.height = (weatherHeight - 43) + 'px'; // 减去header高度
-                    console.log("已调整地图高度为:", weatherHeight);
+                    
+                    // 获取表格高度
+                    const routeTable = document.querySelector('.route-table');
+                    const tableHeight = routeTable ? routeTable.offsetHeight : 0;
+                    
+                    // 计算图片可用高度 (减去header和表格高度)
+                    const headerHeight = 43; // 标题高度
+                    const imgHeight = weatherHeight - headerHeight - tableHeight - 30; // 减去padding
+                    
+                    // 确保图片高度至少为150px
+                    mapImage.style.height = Math.max(150, imgHeight) + 'px';
+                    console.log("已调整地图高度为:", weatherHeight, "图片高度为:", imgHeight);
                 }
             }, 500); // 延迟500ms，确保天气内容已加载
             
@@ -2502,8 +2643,18 @@
                     if (weatherContainer && mapContainer && mapImage) {
                         const weatherHeight = weatherContainer.offsetHeight;
                         mapContainer.style.height = weatherHeight + 'px';
-                        mapImage.style.height = (weatherHeight - 43) + 'px'; // 减去header高度
-                        console.log("天气更新后调整地图高度为:", weatherHeight);
+                        
+                        // 获取表格高度
+                        const routeTable = document.querySelector('.route-table');
+                        const tableHeight = routeTable ? routeTable.offsetHeight : 0;
+                        
+                        // 计算图片可用高度 (减去header和表格高度)
+                        const headerHeight = 43; // 标题高度
+                        const imgHeight = weatherHeight - headerHeight - tableHeight - 30; // 减去padding
+                        
+                        // 确保图片高度至少为150px
+                        mapImage.style.height = Math.max(150, imgHeight) + 'px';
+                        console.log("已调整地图高度为:", weatherHeight, "图片高度为:", imgHeight);
                     }
                 }, 200); // 延迟200ms，确保天气UI已更新
             }
